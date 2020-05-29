@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx练习</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+    <script type="text/babel">
+        const list = ["云韵","紫女", "盖聂", "卫庄", "韩非", "子房"]
+        // 长度不变，值变 --> 用map
+        // const newList = list.map((data, index) => {
+        //     // 遍历的每一次项要求有一个唯一的key属性
+        //     return <h1 key={index}>{data}</h1>
+        // });
+
+        // const list = [
+        //     <li>云韵</li>
+        //     <li>紫女</li>
+        //     <li>盖聂</li>
+        //     <li>卫庄</li>
+        //     <li>韩非</li>
+        //     <li>子房</li>
+        // ]
+
+        // 1,创建虚拟DOM对象
+        // JSX语法中放入数组，自动展开数组的每项元素进行展示
+
+
+
+        const VDom = (
+            <ul>
+                {list.map((data, index) => {
+                    // 遍历每一项元素要求的有一个唯一key属性
+                    return <li key={index}>{data}</li>
+                })}
+            </ul>
+        );
+
+        // 2，渲染到页面的指定的容器中
+        ReactDOM.render(VDom, document.getElementById("root"))
+    </script>
+</body>
+</html>
