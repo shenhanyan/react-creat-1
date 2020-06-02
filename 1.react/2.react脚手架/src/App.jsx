@@ -1,68 +1,85 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
-// import FragmentDemo from "./pages/01.Fragment";
-// import Father from "./pages/02.context/Father";
-// import Index from "./pages/03.性能优化";
-// import ForwardRef from "./pages/04.forwardRef";
-// import Modal from "./pages/05.modal";
-
-import Login from "./pages/06.HOC/Login";
-import Register from "./pages/06.HOC/Register";
-
-/*
-  1. 引入context：
-  2. context内部包含两个组件
-    context.Provider 提供者（负责向后代组件提供数据）
-    context.Consumer 消费者（负责消费数据，使用父（爷）组件提供的数据）
-*/
-// import personContext from "./pages/02.context/context";
+import {
+    BrowserRouter,
+    HashRouter,
+    Link,
+    NavLink,
+    Route,
+    Redirect,
+    Switch,
+  } from "react-router-dom";
+  
+  import About from "./pages/About";
+  import Home from "./pages/Home";
 
 export default class App extends Component {
-  state = {
-    // person: {
-    //   name: "沈涵娮",
-    //   age: 24,
-    // },
-    visible: false,
-  };
+    render() {
+        return (
+            // 最外面必须使用Router，里面子组件才能使用router技术
+            // 给里面子组件传递需要使用的属性 history
+            <HashRouter>
+                <div className="row">
+                    <div className="col-xs-offset-2 col-xs-8">
+                        <div className="page-header">
+                            <h2>React Router Demo</h2>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-2 col-xs-offset-2">
+                        <div className="list-group">
+                            {
+                                /*
+                                Link组件：1，添加浏览器历史记录 
+                                NavLink组件： 1，添加浏览器历史记录 2. 选中时多一个类名 action
 
-  showModal = () => {
-    // 让Modal显示 --> visible: true
-    this.setState({
-      visible: true,
-    });
-  };
+                                什么时候用Link，什么时候用NavLink?
+                                    需要选中时有特殊样式用NavLink
+                                    如果不需要就用LInk
+                                */
+                            }
+                            <NavLink className="list-group-item" to="/about">
+                                About
+                            </NavLink>
 
-  hiddenModel = () => {
-    this.setState({
-      visible: false,
-    });
-  };
-
-  render() {
-    return (
-      // Fragment最终不会生成多余的结构/元素
-      // 空标签就相当于Fragment
-      <>
-        {/* JSX中的注释： */}
-        {/* <FragmentDemo />  */}
-
-        {/* 
-          personContext.Provider组件就会将 this.state.person 数据传递下去 
-          注意：只有后代组件才能接受到
-        */}
-        {/* <personContext.Provider value={this.state.person}>
-          <Father />
-        </personContext.Provider> */}
-        {/* <Index person={this.state.person}/> */}
-
-        {/* <ForwardRef {...this.state.person} ref={this.xxRef}>
-          <p>hello~~~</p>
-        </ForwardRef> */}
-
-        <Login />
-        <Register />
-      </>
-    );
-  }
+                            <Link className="list-group-item" to="/home">
+                                Home
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="col-xs-6">
+                        <div className="panel">
+                            <div className="panel-body">
+                                {
+                                    /*
+                                    Switch  切换
+                                        能保证Rounte只有一个生效，只有一个会加载
+                                        默认情况下，从上到下依次匹配
+                                    */
+                                }
+                                <Switch>
+                                    {
+                                        /*
+                                        Route负责根据浏览器历史记录的变化，一旦匹配上，就会加载当前组件
+                                        如果之前加载过，没有匹配上，就会卸载
+                                        如果之前没有加载过，就不加载
+                                        */
+                                    }
+                                    <Route path="/about" component={About} />
+                                    <Route path="/home" component={Home} />
+                                    {
+                                        /*
+                                        Redirect组件会匹配所有地址，一旦匹配上就会自动更新浏览器历史记录
+                                        */
+                                    }
+                                    <Redirect to="/home" />
+                                </Switch>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </HashRouter>
+        )
+    }
 }

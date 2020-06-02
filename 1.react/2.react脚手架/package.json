@@ -30,6 +30,7 @@
     "pubsub-js": "^1.8.0",
     "pubsub.js": "^1.5.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
   }
 }

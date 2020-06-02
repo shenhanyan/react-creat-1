@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import withForm from "./withForm";
 
+@withForm("注册组件")
 class Register extends Component {
     render() {
         const { handleChange, handleSubmit } = this.props;
@@ -24,4 +25,4 @@ class Register extends Component {
     }
 }
 
-export default withForm(Register);
+export default Register;
